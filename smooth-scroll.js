@@ -1,23 +1,20 @@
 // Smooth scroll
 
-const links = document.querySelectorAll('a[href^="#"]');
+window.addEventListener('load', () => {
+    const links = document.querySelectorAll('a[href^="#"]');
 
-if (links.length) {
-    links.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        const id = document.querySelector(link.hash);
-        const offset = 120;
-        const target = id.offsetTop - offset;
+    if (links.length) {
+        links.forEach((link) => {
+            link.addEventListener("click", () => {
+                const id = document.querySelector(link.hash);
+                const target = id.getBoundingClientRect().top;
 
-        console.log(id);
-        console.log(target);
-
-        window.scroll({
-          top: target,
-          behavior: "smooth",
+                window.scrollTo({
+                    top: target,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            });
         });
-
-        e.preventDefault();
-      });
-    });
-}
+    }
+});
